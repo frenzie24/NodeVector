@@ -1,0 +1,24 @@
+{
+  "name": "nodevector",
+  "version": "1.0.0",
+  "description": "Simple CLI to draw svg's with text and a selected shape",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frenzie24/NodeVector.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frenzie24/NodeVector/issues"
+  },
+  "homepage": "https://github.com/frenzie24/NodeVector#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^8.2.4"
+  }
+}
