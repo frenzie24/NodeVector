@@ -10,8 +10,7 @@ const filterColorInput = (input) => {
     if (input.slice(0, 1) == '#') {
         if (input.length !== 4 && input.length != 7) throw new Error('Incorrect hex length.  Please try again')
         else return input;
-    }
-    return findColorDataByName(input)
+    } else return findColorDataByName(input)
 }
 
 // array of questions to pass to Prompter class.
@@ -69,6 +68,7 @@ const handleAnswers = (answers) => {
     logger(answers, 'bgBlue');
     let svgString = ``;
     let s;
+    if (answers.shapeColor.hex) answers.shapeColor = answers.shapeColor.hex;
     switch (answers.shape) {
         case 'Sqaure':
 
