@@ -6,14 +6,29 @@ let Shapes = require('./scripts/shapes.js')
 logger('hello world', 'blue');
 
 const filterColorInput = (input) => {
+    // console.log(input)
     input.trim();
-    if (input.slice(0, 1) == '#') {
-        if (input.length !== 4 && input.length != 7) throw new Error('Incorrect hex length.  Please try again')
-        else return input;
-    }
-    return findColorDataByName(input)
+     return findColorDataByName(input)
 }
 
+const filterShapeColorInput = (input) => {
+    // console.log(input)
+    input.trim();
+     return findColorDataByName(input)
+}
+
+
+const validateColorInput = (input) => {
+    input.length != 0;
+    let test = input.slice(0,1);
+    if (test == '#') {
+       
+        console.log('this is a hex value ', input)
+        if (input.length !== 4 && input.length != 7) throw new Error('Incorrect hex length.  Please try again')
+    }
+        return true;
+
+    }
 // array of questions to pass to Prompter class.
 let questions = [{
     type: 'input',
@@ -31,11 +46,7 @@ let questions = [{
     name: 'textColor',
     message: 'Enter your text color '.rainbow,
 
-    validate: (input) => {
-        input.length != 0;
-        return true;
-
-    },
+    validate: validateColorInput,
     filter: filterColorInput,
     suffix: '(in hex or by name):'.magenta,
 
@@ -46,10 +57,16 @@ let questions = [{
 
     validate: (input) => {
         input.length != 0;
-        return true;
+        let test = input.slice(0,1);
+        if (test == '#') {
+           
+          
+            if (input.length !== 4 && input.length != 7) throw new Error('Incorrect hex length.  Please try again')
+        }
+            return true;
 
-    },
-    filter: filterColorInput,
+        },
+    filter: filterShapeColorInput,
     suffix: '(in hex or by name):'.magenta,
 
 }, {
@@ -80,7 +97,7 @@ const handleAnswers = (answers) => {
             s = new Shapes.Circle(answers.shapeColor, answers.text, answers.textColor);
             svgString = s.render();
             break;
-        case 'Sqaure':
+        case 'Triangle':
 
             s = new Shapes.Triangle(answers.shapeColor, answers.text, answers.textColor);
             svgString = s.render();

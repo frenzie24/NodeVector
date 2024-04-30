@@ -848,7 +848,12 @@ const findColorDataByName = (name) => {
     // removes all white space
     name = name.replaceAll(" ", "");
     name = name.toUpperCase();
-
+    console.log(name)
+    if (name.slice(0, 1) == '#') {
+        console.log('name is a hex: \n', name)
+        return name;
+   } 
+   console.log('should we be here with this name: ', name)
     let colorData = colors.find((element) => element.name == name);
     // this needs to be expanded to have rbg formatted for passing to qs
     if (!colorData) throw new Error(`No data found for ${name}.  Try again`)
