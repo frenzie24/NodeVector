@@ -46,7 +46,7 @@ class Triangle extends Shape {
     constructor(color, text, textColor) {
         super(color, text, textColor);
         this.shapeEle = ` <polygon points="0,200 300,200 150,0" style="fill:${color}" />`
-        this.textEle = `<text x="50%" y="66%" dominant-baseline="middle" text-anchor="middle" fill="${this.textColor}" font-size="60" stroke="${this.textColor}" stroke-width=1 >${this.text}</text>`
+        this.textEle = `<text x="50%" y="66%" dominant-baseline="middle" text-anchor="middle" fill="${this.textColor}" font-size="60" stroke="${this.textColor}" >${this.text}</text>`
     }
 }
 
