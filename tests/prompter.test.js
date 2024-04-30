@@ -15,12 +15,19 @@ describe('Prompter', () => {
             }]);
             expect(Array.isArray(prompter.questions)).toBe(true);
             expect('name' in prompter.questions[0] && 'type' in prompter.questions[0] && 'message' in prompter.questions[0]).toBe(true);
+        });
+
+        it('should return an error if passed questions are undefined.', () =>{
+            const pt = () => new Prompter();
+            let error = new Error ('Questions for this prompt are undefined')
+            expect(pt).toThrow(error);
+         
         })
     })
 
     describe('validateInput', () => {
         it('should accept input no longer than 3 characters', () => {
-           
+
             const prompter = new Prompter([{
                 type: 'input',
                 name: 'textColor',
@@ -28,43 +35,31 @@ describe('Prompter', () => {
                 suffix: '(in hex or by name):'.green,
 
             }]);
-           // prompter.startPrompt();
             expect(prompter.validateInput('311')).toBe(true);
         });
     });
-    
+
 
     describe('filterInput', () => {
-        it('should return a string with no empty characters at the beginning or end');
-        
-        const prompter = new Prompter([{
-            type: 'input',
-            name: 'textColor',
-            message: 'Enter your color '.rainbow,
-            suffix: '(in hex or by name):'.green,
+        it('should return a string with no empty characters at the beginning or end', () => {
 
-        }]);
-       // prompter.startPrompt();
-       let input = prompter.filterInput(' 311 ');
-       let zero = input.charAt(0);
-       let two = input.charAt(2);
-        expect(zero != " " && two != " ").toBe(true);
-    });
-
-    
-
-    describe('startPrompt', () => {
-        it('should call _startPrompt and pass questions'); 
             const prompter = new Prompter([{
                 type: 'input',
                 name: 'textColor',
                 message: 'Enter your color '.rainbow,
                 suffix: '(in hex or by name):'.green,
-    
+
             }]);
-            expect(prompter.startPrompt([prompter.questions]) != null).toBe(true);
-        
+            let input = prompter.filterInput(' 311 ');
+            let zero = input.charAt(0);
+            let two = input.charAt(2);
+            expect(zero != " " && two != " ").toBe(true);
+        });
     });
+
+    
+
+   
     /*
     
     */
