@@ -20,7 +20,7 @@ let questions = [{
     message: 'Please Enter 3 Characters'.green,
     validate: (input) => {
         if (input.length < 4) {
-            return input;
+            return true;
         } else throw new Error('Too many characters entered.  Please try again.')
     }
 
@@ -38,6 +38,8 @@ let questions = [{
     suffix: '(in hex or by name):'.green,
 
 }]
-
-let prompter = new Prompter(questions);
+const handleAnswers = (answers) => {
+    logger(answers, 'bgBlue');
+};
+let prompter = new Prompter(questions, handleAnswers);
 prompter.startPrompt();
