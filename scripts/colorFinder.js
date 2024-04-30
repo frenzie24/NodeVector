@@ -851,6 +851,7 @@ const findColorDataByName = (name) => {
 
     let colorData = colors.find((element) => element.name == name);
     // this needs to be expanded to have rbg formatted for passing to qs
+    if (!colorData) colorData = '#000000';
     return colorData;
 
 }
