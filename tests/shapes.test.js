@@ -4,16 +4,26 @@ const Square = Shapes.Square;
 const Triangle = Shapes.Triangle;
 
 describe('Shape', () => {
-    it('should throw an error if any parameters in the constructor are undefined', () => {
+    it('should throw an error if any parameters in the constructor are undefined or not a string', () => {
         let shape = () => new Circle();
-        let error = new Error('Shapes require: color, text, and textColor');
+        let error = new Error('Shape parameters must be a 3 defined strings');
         expect(shape).toThrow(error);
     });
 
-    it('should return a string when render() is called', () => {
-        let shape = new Circle('green', 'KCG', 'yellow');
-        let renderString = shape.render();
-        expect(typeof renderString).toBe('string');
+    describe('checkArg', ()=>{
+        it('should return false if arg is undefined or not a string', () => {
+            let shape = new Square('green', 'KCG', 'yellow');
+            expect(shape.checkArg(undefined)).toBeFalsey;
+            expect(shape.checkArg(1)).toBeFalsey;
+        });
+    })
+
+    describe('render', ()=> {
+        it('should return a string', () => {
+            let shape = new Triangle('green', 'KCG', 'yellow');
+            let renderString = shape.render();
+            expect(typeof renderString).toBe('string');
+        })
     })
 });
 

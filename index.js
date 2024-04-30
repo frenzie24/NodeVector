@@ -66,14 +66,15 @@ let questions = [{
 
 }]
 
+// callback function we pass to our prompter class to handle user input
 const handleAnswers = (answers) => {
     logger(answers, 'bgBlue');
     let svgString = ``;
     let s;
-   
+
+    //ansers.shape can only be "Sqaure", "Circle", "Triangle", just in case default will create a square
     switch (answers.shape) {
         case 'Sqaure':
-
             s = new Shapes.Square(answers.shapeColor, answers.text, answers.textColor);
             svgString = s.render();
             break;
@@ -93,8 +94,8 @@ const handleAnswers = (answers) => {
             break;
     }
     console.log(svgString);
-    fs.writeFile('logo.svg', svgString, (res)=>{
-        if (res != typeof (Error)){
+    fs.writeFile('logo.svg', svgString, (res) => {
+        if (res != typeof (Error)) {
             logger('Generated logo.svg', 'bgGreen');
         }
     })

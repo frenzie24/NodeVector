@@ -22,8 +22,7 @@ class Prompter {
         this.questions = questions;
         this.handleAnswers = handleAnswers;
 
-        // for every question, add validateInput and filterInput to their object
-
+        // for every question, add validateInput and filterInput to their object if they are not predefined
         this.questions.map(question => {
             question.validate = question.validate ? question.validate : this.validateInput;
             question.filter = question.filter ? question.filter : this.filterInput;
@@ -33,17 +32,22 @@ class Prompter {
 
     }
 
+    //start prompting the user for input answering passed questions to be handled by passed handleAnswers
     startPrompt = async () => {
+        // if questions or handleAnswers are not defined throw an error
         if (!this.questions) throw new Error('Cannot start prompt. Questions for this prompt are undefined');
         if (!this.handleAnswers) throw new Error('Cannot start prompt. Answer Handling for this prompt is undefined');
+        // prompt called
         await inquirer.prompt(this.questions).then(answer => {
             this.handleAnswers(answer);
         });
     }
 
+    // default filter callback
     filterInput(input) {
         return input.trim();
     }
+    // defualt validate callback
     validateInput(input) {
         if (!input.length) {
             return 'Input required';
