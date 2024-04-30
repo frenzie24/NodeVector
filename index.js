@@ -28,7 +28,20 @@ let questions = [{
 }, {
     type: 'input',
     name: 'textColor',
-    message: 'Enter your color '.rainbow,
+    message: 'Enter your text color '.rainbow,
+
+    validate: (input) => {
+        input.length != 0;
+        return true;
+
+    },
+    filter: filterColorInput,
+    suffix: '(in hex or by name):'.green,
+
+}, {
+    type: 'input',
+    name: 'shapeColor',
+    message: 'Enter your shape color '.rainbow,
 
     validate: (input) => {
         input.length != 0;
@@ -41,7 +54,7 @@ let questions = [{
 }]
 const handleAnswers = (answers) => {
     logger(answers, 'bgBlue');
-    let circle = new Shapes.Triangle(answers.textColor, answers.text, answers.textColor);
+    let circle = new Shapes.Triangle(answers.shapeColor, answers.text, answers.textColor);
     console.log(circle.render());
 };
 let prompter = new Prompter(questions, handleAnswers);
