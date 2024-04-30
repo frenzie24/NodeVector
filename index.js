@@ -41,7 +41,7 @@ let questions = [{
 }]
 const handleAnswers = (answers) => {
     logger(answers, 'bgBlue');
-    let circle = new Shapes.Circle(answers.textColor, answers.text, answers.textColor);
+    let circle = new Shapes.Square(answers.textColor, answers.text, answers.textColor);
     console.log(circle.render());
 };
 let prompter = new Prompter(questions, handleAnswers);
