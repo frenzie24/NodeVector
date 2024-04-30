@@ -4,6 +4,46 @@ const Prompter = require('../scripts/prompter.js');
 // A testing suite for prompter is created.
 describe('Prompter', () => {
     // a test is craeted to ensure handleanswers is not undefined
+    it('should throw an error if passed questions are undefined.', () => {
+        const pt = () => new Prompter(undefined, () => { });
+        let error = new Error('Params for this prompt are undefined')
+        expect(pt).toThrow(error);
+
+    })
+
+    it('Should accept single question objects', () => {
+        const prompter = new Prompter({
+            type: 'input',
+            name: 'textColor',
+            message: 'Enter your color '.rainbow,
+            suffix: '(in hex or by name):'.green,
+
+        }, () => { });
+        expect(Array.isArray(prompter.questions)).toBe(true);
+
+    });
+    it('should throw an error if passed handleAnswers is not a function',()=>{
+        const pt = ()=> new Prompter([{
+            type: 'input',
+            name: 'textColor',
+            message: 'Enter your color '.rainbow,
+            suffix: '(in hex or by name):'.green,
+
+        }], 'hey there!');
+        console.log(typeof pt.handleAnswers)
+        expect(pt).toThrow(new Error('handleAnswers must be a function.'))});
+
+    it('should throw an error if undefined', () => {
+        const pt = () => new Prompter([{
+            type: 'input',
+            name: 'textColor',
+            message: 'Enter your color '.rainbow,
+            suffix: '(in hex or by name):'.green,
+
+        }], undefined);
+        let error = new Error('handleAnswers for this prompt are undefined.');
+        expect(pt).toThrow(error)
+    });
 
     describe('checkArg', () => {
         it('should return false if arg is undefined', () => {
@@ -37,24 +77,12 @@ describe('Prompter', () => {
             expect(pt.checkArg('Hi!')).toBe(true);
         })
     })
-    describe('handleAnswers', () => {
-        it('should throw an error if undefined', () => {
-            const pt = () => new Prompter([{
-                type: 'input',
-                name: 'textColor',
-                message: 'Enter your color '.rainbow,
-                suffix: '(in hex or by name):'.green,
-
-            }], undefined);
-            let error = new Error('handleAnswers for this prompt are undefined.');
-            expect(pt).toThrow(error)
-        });
-    })
+    
 
     // A test is created to ensure questions is valid for work
     describe('questions', () => {
         // test to ensure questions is an array
-        it('should be an array of objects', () => {
+       /* it('should be an array of objects', () => {
             const prompter = new Prompter([{
                 type: 'input',
                 name: 'textColor',
@@ -64,16 +92,11 @@ describe('Prompter', () => {
             }], () => { });
             expect(Array.isArray(prompter.questions)).toBe(true);
 
-        });
+        });*/
         // test to ensure an undefined questions [] will result in an error thrown
-        it('should throw an error if passed questions are undefined.', () => {
-            const pt = () => new Prompter(undefined, () => { });
-            let error = new Error('Params for this prompt are undefined')
-            expect(pt).toThrow(error);
-
-        })
+       
         // text to ensure critical key value pairs exist
-        it('each object must contain the type key', () => {
+        it('each question object must contain the type key', () => {
             const prompter = new Prompter([{
                 type: 'input',
                 name: 'textColor',
@@ -83,7 +106,7 @@ describe('Prompter', () => {
             }], () => { });
             expect('type' in prompter.questions[0]).toBe(true);
         })
-        it('each object must contain the name key', () => {
+        it('each question object must contain the name key', () => {
             const prompter = new Prompter([{
                 type: 'input',
                 name: 'textColor',
@@ -93,7 +116,7 @@ describe('Prompter', () => {
             }], () => { });
             expect('name' in prompter.questions[0]).toBe(true);
         })
-        it('each object must contain the message key', () => {
+        it('each question object must contain the message key', () => {
             const prompter = new Prompter([{
                 type: 'input',
                 name: 'textColor',

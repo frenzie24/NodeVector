@@ -32,6 +32,9 @@ class Prompter {
 
         });
 
+        if (typeof this.handleAnswers != 'function')
+            throw new Error('handleAnswers must be a function.')
+
 
     }
 
