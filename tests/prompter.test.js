@@ -1,9 +1,9 @@
 // Constructor Arithmetic is imported.
 const Prompter = require('../scripts/prompter.js');
 
-// A testing suite for Arithmetic is created.
+// A testing suite for prompter is created.
 describe('Prompter', () => {
-
+    // a test is craeted to ensure handleanswers is not undefined
     describe('handleAnswers', () => {
         it('should throw an error if undefined', ()=>{
             const pt = () => new Prompter([{
@@ -18,9 +18,10 @@ describe('Prompter', () => {
         });
     })
 
-    // A test is created to check that sum does in fact return the two numbers added together.
+    // A test is created to ensure questions is valid for work
     describe('questions', () => {
-        it('should be an array of objects, with each object containing a minimum keys type, name, and message', () => {
+        // test to ensure questions is an array
+        it('should be an array of objects', () => {
             const prompter = new Prompter([{
                 type: 'input',
                 name: 'textColor',
@@ -29,19 +30,44 @@ describe('Prompter', () => {
 
             }],()=>{});
             expect(Array.isArray(prompter.questions)).toBe(true);
-            expect('name' in prompter.questions[0] && 'type' in prompter.questions[0] && 'message' in prompter.questions[0]).toBe(true);
+           
         });
-
+        // test to ensure an undefined questions [] will result in an error thrown
         it('should throw an error if passed questions are undefined.', () => {
             const pt = () => new Prompter(undefined, ()=>{});
             let error = new Error('Params for this prompt are undefined')
             expect(pt).toThrow(error);
 
         })
+        // text to ensure critical key value pairs exist
+        it('with each object containing at least the keys type, name, and message', ()=>{
+            const prompter = new Prompter([{
+                type: 'input',
+                name: 'textColor',
+                message: 'Enter your color '.rainbow,
+                suffix: '(in hex or by name):'.green,
+
+            }],()=>{});
+            expect('name' in prompter.questions[0] && 'type' in prompter.questions[0] && 'message' in prompter.questions[0]).toBe(true);
+        })
+        // test to ensure improper question object cause an error to throw
+        it('should throw an error when an object in questions[] has undefined or invalid values in keys name, message, or type', ()=>{
+            const pt =()=> new Prompter([{
+                name: undefined,
+                message: undefined,
+                type: undefined,
+            }], ()=>{});
+            let error = new Error('Name, type, and message properties of all questions must be defined as strings.')
+
+            expect(pt).toThrow(error);
+
+        });
+       
     })
 
+    // test for the default validate callback 
     describe('validateInput', () => {
-        it('should accept input no longer than 3 characters', () => {
+        it('should verify input has been entered', () => {
 
             const prompter = new Prompter([{
                 type: 'input',
@@ -50,11 +76,11 @@ describe('Prompter', () => {
                 suffix: '(in hex or by name):'.green,
 
             }], ()=>{});
-            expect(prompter.validateInput('311')).toBe(true);
+            expect(prompter.validateInput('1')).toBe(true);
         });
     });
 
-
+    // test for the default filter callback 
     describe('filterInput', () => {
         it('should return a string with no empty characters at the beginning or end', () => {
 
@@ -73,17 +99,5 @@ describe('Prompter', () => {
     });
 
 
-    /*
-    
-    */
-
-    // A test is created to check that the difference does in fact return the difference between the two numbers.
-    /* describe('filterInput', () => {
-       it('should take two numbers find the difference', () => {
-         const total = 0;
-         const arithmetic = new Arithmetic();
-         expect(arithmetic.difference(2, 2)).toEqual(total);
-       });
-     });
-   */
+  
 });

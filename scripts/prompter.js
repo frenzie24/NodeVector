@@ -24,6 +24,9 @@ class Prompter {
 
         // for every question, add validateInput and filterInput to their object if they are not predefined
         this.questions.map(question => {
+            if(!this.checkArg(question.name) || !this.checkArg(question.type) || !this.checkArg(question.message)) {
+                throw new Error('Name, type, and message properties of all questions must be defined as strings.')
+            } 
             question.validate = question.validate ? question.validate : this.validateInput;
             question.filter = question.filter ? question.filter : this.filterInput;
 
@@ -41,6 +44,12 @@ class Prompter {
         await inquirer.prompt(this.questions).then(answer => {
             this.handleAnswers(answer);
         });
+    }
+    
+    checkArg(arg) {
+        if (!arg) return false;
+        if (typeof arg !== 'string') return false;
+        return true;
     }
 
     // default filter callback
