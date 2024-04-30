@@ -5,6 +5,9 @@ const nl = `
 //parent of all shapes
 class Shape {
     constructor(color, text, textColor) {
+        if(!color || !text || !textColor) {
+            throw new Error('Shapes require: color, text, and textColor')
+        }
         this.fill = color;
         this.text = text;
         this.textColor = textColor;
@@ -25,6 +28,7 @@ class Square extends Shape {
         this.shapeEle = `<rect width="300" height="200" x="0" y="0"  fill="${color.hex}" />`;
         this.textEle = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" stroke=${this.textColor.hex} fill=${this.textColor.hex} font-size="90" >${this.text}</text>`
     }
+
 }
 
 // draws circle with text inside
@@ -34,6 +38,7 @@ class Circle extends Shape {
         this.shapeEle = `<circle r="35%" cx="50%" cy="50%" fill="${color.hex}" />`
         this.textEle = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" stroke=${this.textColor.hex} fill=${this.textColor.hex} font-size="70" >${this.text}</text>`
     }
+   
 }
 
 //draws triangle with text inside
@@ -46,4 +51,4 @@ class Triangle extends Shape {
 }
 
 
-module.exports = {Square, Circle, Triangle};
+module.exports = { Square, Circle, Triangle};
