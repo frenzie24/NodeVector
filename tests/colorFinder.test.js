@@ -17,9 +17,10 @@ describe('findColorDataByName', ()=> {
         let err = new Error ('No data found for BREAKIT.  Try again')
         expect(fcdbm).toThrow(err);
     })
-    it('Should return a string when passed a valid hex value or color name', ()=> {
+    it('Should return a string when passed a valid color name', ()=> {
         let fcdbm = findColorDataByName('red');
         expect(typeof fcdbm).toEqual('string');
         
     })
+    
 });

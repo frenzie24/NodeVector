@@ -26,6 +26,16 @@ describe('Prompter', () => {
             }], () => { });
             expect(pt.checkArg(1)).toBeFalsey;
         })
+        it('should return true if arg is a string',()=>{
+            const pt = new Prompter([{
+                type: 'input',
+                name: 'textColor',
+                message: 'Enter your color '.rainbow,
+                suffix: '(in hex or by name):'.green,
+
+            }], () => { });
+            expect(pt.checkArg('Hi!')).toBe(true);
+        })
     })
     describe('handleAnswers', () => {
         it('should throw an error if undefined', () => {
