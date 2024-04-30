@@ -19,6 +19,7 @@ let questions = [{
     type: 'input',
     name: 'text',
     message: 'Please Enter 3 Characters'.green,
+    suffix: ' and no more.'.red,
     validate: (input) => {
         if (input.length < 4) {
             return true;
@@ -36,7 +37,7 @@ let questions = [{
 
     },
     filter: filterColorInput,
-    suffix: '(in hex or by name):'.green,
+    suffix: '(in hex or by name):'.magenta,
 
 }, {
     type: 'input',
@@ -49,13 +50,47 @@ let questions = [{
 
     },
     filter: filterColorInput,
-    suffix: '(in hex or by name):'.green,
+    suffix: '(in hex or by name):'.magenta,
+
+}, {
+    type: 'list',
+    name: 'shape',
+    message: 'Select your shape '.white,
+    choices: ['Square', 'Circle', 'Triangle'],
+    validate: (input) => {
+        // input.length != 0;
+        return true;
+
+    },
+
 
 }]
 const handleAnswers = (answers) => {
     logger(answers, 'bgBlue');
-    let circle = new Shapes.Triangle(answers.shapeColor, answers.text, answers.textColor);
-    console.log(circle.render());
+    let svgString = ``;
+    let s;
+    switch (answers.shape) {
+        case 'Sqaure':
+
+            s = new Shapes.Square(answers.shapeColor, answers.text, answers.textColor);
+            svgString = s.render();
+            break;
+        case 'Circle':
+
+            s = new Shapes.Circle(answers.shapeColor, answers.text, answers.textColor);
+            svgString = s.render();
+            break;
+        case 'Sqaure':
+
+            s = new Shapes.Triangle(answers.shapeColor, answers.text, answers.textColor);
+            svgString = s.render();
+            break;
+        default:
+            s = new Shapes.Square(answers.shapeColor, answers.text, answers.textColor);
+            svgString = s.render();
+            break;
+    }
+    console.log(svgString);
 };
 let prompter = new Prompter(questions, handleAnswers);
 prompter.startPrompt();
