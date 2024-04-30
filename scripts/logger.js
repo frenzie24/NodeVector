@@ -24,7 +24,7 @@ function findColor(msg, color) {
         case `bgRed`: return colors.bgRed(msg);
         case `bgGreen`: return colors.bgGreen(msg);
         case `bgYellow`: return colors.bgYellow(msg);
-        case `bgBlue`: return colorsg.bgBlue(msg);
+        case `bgBlue`: return colors.bgBlue(msg);
         case `bgMagenta`: return colors.bgMagenta(msg);
         case `bgCyan`: return colors.bgCyan(msg);
         case `bgWhite`: return colors.bgWhite(msg);
@@ -35,7 +35,7 @@ function findColor(msg, color) {
         case `bgBrightYellow`: return colors.bgBrightYellow(msg);
         case `bgBrightBlue`: return colors.bgBrightBlue(msg);
         case `bgBrightMagenta`: return colors.bgBrightMagenta(msg);
-        case `bgBrightCyan`: return colorsg.bgBrightCyan(msg);
+        case `bgBrightCyan`: return colors.bgBrightCyan(msg);
         case `bgBrightWhite`: return colors.bgBrightWhite(msg);
 
         default: return msg;
