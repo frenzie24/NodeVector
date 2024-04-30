@@ -2,6 +2,7 @@ let logger = require('./scripts/logger.js');
 let { validateInput, filterInput } = require('./scripts/prompter.js')
 let findColorDataByName = require('./scripts/colorFinder.js')
 let Prompter = require('./scripts/prompter.js')
+let Shapes = require('./scripts/shapes.js')
 logger('hello world', 'blue');
 
 const filterColorInput = (input) => {
@@ -40,6 +41,8 @@ let questions = [{
 }]
 const handleAnswers = (answers) => {
     logger(answers, 'bgBlue');
+    let circle = new Shapes.Circle(answers.textColor, answers.text, answers.textColor);
+    console.log(circle);
 };
-let prompter = new Prompter(undefined, handleAnswers);
+let prompter = new Prompter(questions, handleAnswers);
 prompter.startPrompt();
