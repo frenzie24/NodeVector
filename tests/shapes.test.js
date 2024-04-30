@@ -15,4 +15,5 @@ describe('Shape', () => {
         let renderString = shape.render();
         expect(typeof renderString).toBe('string');
     })
-})
+});
+

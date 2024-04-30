@@ -3,6 +3,7 @@ let { validateInput, filterInput } = require('./scripts/prompter.js')
 let findColorDataByName = require('./scripts/colorFinder.js')
 let Prompter = require('./scripts/prompter.js')
 let Shapes = require('./scripts/shapes.js')
+let fs = require('fs');
 logger('hello world', 'blue');
 
 const filterColorInput = (input) => {
@@ -10,7 +11,7 @@ const filterColorInput = (input) => {
     if (input.slice(0, 1) == '#') {
         if (input.length !== 4 && input.length != 7) throw new Error('Incorrect hex length.  Please try again')
         else return input;
-    } else return findColorDataByName(input)
+    } else return findColorDataByName(input).hex
 }
 
 // array of questions to pass to Prompter class.
@@ -64,11 +65,12 @@ let questions = [{
 
 
 }]
+
 const handleAnswers = (answers) => {
     logger(answers, 'bgBlue');
     let svgString = ``;
     let s;
-    if (answers.shapeColor.hex) answers.shapeColor = answers.shapeColor.hex;
+   
     switch (answers.shape) {
         case 'Sqaure':
 
@@ -91,6 +93,11 @@ const handleAnswers = (answers) => {
             break;
     }
     console.log(svgString);
+    fs.writeFile('logo.svg', svgString, (res)=>{
+        if (res != typeof (Error)){
+            logger('Generated logo.svg', 'bgGreen');
+        }
+    })
 };
 let prompter = new Prompter(questions, handleAnswers);
 prompter.startPrompt();
