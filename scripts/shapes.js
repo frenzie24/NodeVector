@@ -8,7 +8,7 @@ class Shape {
         this.fill = color;
         this.text = text;
         this.textColor = textColor;
-        this.svgString = `<svg width="300 height="200 xmlns="http//www.w3.org/2000/svg>`;
+        this.svgString = `<svg width="300" height="200" xmlns="http//www.w3.org/2000/svg">`;
         this.textEle = ``;
         this.shapeEle = ``;
     }
