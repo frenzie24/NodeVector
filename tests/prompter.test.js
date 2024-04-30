@@ -3,6 +3,21 @@ const Prompter = require('../scripts/prompter.js');
 
 // A testing suite for Arithmetic is created.
 describe('Prompter', () => {
+
+    describe('handleAnswers', () => {
+        it('should throw an error if undefined', ()=>{
+            const pt = () => new Prompter([{
+                type: 'input',
+                name: 'textColor',
+                message: 'Enter your color '.rainbow,
+                suffix: '(in hex or by name):'.green,
+
+            }], undefined);
+            let error = new Error('handleAnswers for this prompt are undefined.');
+            expect(pt).toThrow(error)
+        });
+    })
+
     // A test is created to check that sum does in fact return the two numbers added together.
     describe('questions', () => {
         it('should be an array of objects, with each object containing a minimum keys type, name, and message', () => {
@@ -12,16 +27,16 @@ describe('Prompter', () => {
                 message: 'Enter your color '.rainbow,
                 suffix: '(in hex or by name):'.green,
 
-            }]);
+            }],()=>{});
             expect(Array.isArray(prompter.questions)).toBe(true);
             expect('name' in prompter.questions[0] && 'type' in prompter.questions[0] && 'message' in prompter.questions[0]).toBe(true);
         });
 
-        it('should return an error if passed questions are undefined.', () =>{
-            const pt = () => new Prompter();
-            let error = new Error ('Questions for this prompt are undefined')
+        it('should throw an error if passed questions are undefined.', () => {
+            const pt = () => new Prompter(undefined, ()=>{});
+            let error = new Error('Params for this prompt are undefined')
             expect(pt).toThrow(error);
-         
+
         })
     })
 
@@ -34,7 +49,7 @@ describe('Prompter', () => {
                 message: 'Enter your color '.rainbow,
                 suffix: '(in hex or by name):'.green,
 
-            }]);
+            }], ()=>{});
             expect(prompter.validateInput('311')).toBe(true);
         });
     });
@@ -49,7 +64,7 @@ describe('Prompter', () => {
                 message: 'Enter your color '.rainbow,
                 suffix: '(in hex or by name):'.green,
 
-            }]);
+            }], ()=>{});
             let input = prompter.filterInput(' 311 ');
             let zero = input.charAt(0);
             let two = input.charAt(2);
@@ -57,9 +72,7 @@ describe('Prompter', () => {
         });
     });
 
-    
 
-   
     /*
     
     */

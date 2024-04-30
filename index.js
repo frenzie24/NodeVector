@@ -41,5 +41,5 @@ let questions = [{
 const handleAnswers = (answers) => {
     logger(answers, 'bgBlue');
 };
-let prompter = new Prompter(questions, handleAnswers);
+let prompter = new Prompter(undefined, handleAnswers);
 prompter.startPrompt();
