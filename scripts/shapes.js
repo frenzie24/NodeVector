@@ -37,7 +37,7 @@ class Shape {
 class Square extends Shape {
     constructor(color, text, textColor) {
         super(color, text, textColor);
-        this.shapeEle = `<rect width="300" height="200" x="0" y="0"  fill="${color}" />`;
+        this.shapeEle = `<rect width="200" height="200" x="50" y="0"  fill="${color}" />`;
         this.textEle = `<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" stroke="${this.textColor}" fill="${this.textColor}" font-size="90" >${this.text}</text>`
     }
 
